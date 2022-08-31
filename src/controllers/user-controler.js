@@ -1,40 +1,31 @@
-const crypto = require("crypto")
 
-const users = []
+const userService = require("../services/user-service")
 
 
-function getAllUsers(req,res){
+
+const getAllUsers = (req,res)=>{
+    const users = userService.findAllUsers()
     res.send(users)
 }
 
 const getUserByID = (req,res)=>{
     const id = req.params.id
-
-    const user = users.find(user => user.id === id)  
+    const user = userService.findUserById(id)
 
     res.send(user)
 }
 
 const createUser = (req,res)=>{
-    const id = crypto.randomUUID()
-
-    const user = {
-        id:id,
-        name:req.body.name,
-        age:req.body.age
-    }
-    
-    users.push(user)
+    const {name,age} = req.body
+    const user = userService.createUser(name,age)
     res.status(201).send(user)
 }
 
 const updateUser = (req,res)=>{
+    const {name,age} = req.body
     const id = req.params.id
 
-    const user = users.find(user => user.id === id)  
-
-    user.name = req.body.name
-    user.age = req.body.age
+    const user = userService.updateUser(id,name,age)
 
     res.send(user)
    
@@ -43,10 +34,8 @@ const updateUser = (req,res)=>{
 const deleteUser = (req,res)=>{
     const id = req.params.id
 
-    const index = users.indexOf({
-        id: id
-    })
-    users.splice(index,1)
+    const users = userService.deleteUser(id)
+
     res.send(users)
 }
 module.exports = {getAllUsers, getUserByID,createUser,updateUser,deleteUser}
