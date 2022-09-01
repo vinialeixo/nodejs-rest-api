@@ -3,21 +3,21 @@ const userService = require("../services/user-service")
 
 
 
-const getAllUsers = (req,res)=>{
-    const users = userService.findAllUsers()
+const getAllUsers = async (req,res)=>{
+    const users = await userService.findAllUsers()
     res.send(users)
 }
 
-const getUserByID = (req,res)=>{
+const getUserByID = async (req,res)=>{
     const id = req.params.id
-    const user = userService.findUserById(id)
+    const user = await userService.findUserById(id)
 
     res.send(user)
 }
 
-const createUser = (req,res)=>{
+const createUser =  async(req,res)=>{
     const {name,age} = req.body
-    const user = userService.createUser(name,age)
+    const user =  await userService.createUser(name,age)
     res.status(201).send(user)
 }
 
