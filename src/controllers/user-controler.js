@@ -21,20 +21,20 @@ const createUser =  async(req,res)=>{
     res.status(201).send(user)
 }
 
-const updateUser = (req,res)=>{
+const updateUser = async(req,res)=>{
     const {name,age} = req.body
     const id = req.params.id
 
-    const user = userService.updateUser(id,name,age)
+    const user = await userService.updateUser(id,name,age)
 
     res.send(user)
    
 }
 
-const deleteUser = (req,res)=>{
+const deleteUser = async(req,res)=>{
     const id = req.params.id
 
-    const users = userService.deleteUser(id)
+    const users = await userService.deleteUser(id)
 
     res.send(users)
 }

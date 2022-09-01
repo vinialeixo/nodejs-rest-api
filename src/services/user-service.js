@@ -28,22 +28,16 @@ async function createUser(name,age){
     return rows
 }
 
-function updateUser(id,name,age){
-    const user = users.find(user => user.id === id)  
+async function updateUser(id,name,age){
 
-    user.name = name
-    user.age = age
+    const {rows} = await client.query('UPDATE users SET age=$2,name=$3 WHERE ID=$1', [id,age,name])
 
-    return user
+    return rows
 }
 
-function deleteUser(id){
-    const index = users.indexOf({
-        id: id
-    })
-    users.splice(index,1)
-
-    return users
+async function deleteUser(id){
+    const {rows} = await client.query('DELETE FROM users WHERE ID=$1 ', [id])
+    return rows
 }
 
 module.exports = {findUserById,findAllUsers,createUser,updateUser,deleteUser}
