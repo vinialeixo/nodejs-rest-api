@@ -3,8 +3,7 @@ const {Router} = require("express")
 const userRoutes = Router()
 
 
-// const {getAllUsers,getUserByID} = require("../controllers/user-Controler")
-const userControler = require("../controllers/user-Controler")
+const userControler = require("../controllers/user-controler")
 
 
 
