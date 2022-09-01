@@ -1,3 +1,3 @@
 const app = require("./config/server-config")
-
-app.listen(8000,()=>{console.log("server listen 8000")})
+const port = process.env.PORT || 3000
+app.listen(port,()=>{console.log(`server  runing ${port}`)})

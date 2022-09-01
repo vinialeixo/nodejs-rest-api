@@ -1,10 +1,7 @@
 const { Client } = require('pg');
+const connectionURI = process.env.DATABASE_URL
 const client = new Client({
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'admin',
-    password: 'admin',
-    database: 'postgres',
+   connectionString:connectionURI
 });
 
 client.connect()
